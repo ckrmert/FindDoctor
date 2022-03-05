@@ -1,0 +1,174 @@
+﻿@model FindDoctor.Classes.Blog
+
+@{
+    ViewBag.Title = "Blogs";
+}
+
+<head>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+</head>
+
+<main>
+
+    <div class="layer"></div>
+    <!-- Mobile menu overlay mask -->
+
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+    <!-- End Preload -->
+
+
+    <div id="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Category</a></li>
+                <li>All</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /breadcrumb -->
+
+    <div class="container margin_60" >
+        <div class="main_title">
+            <h1>Findoctor Blog</h1>
+            <p id="qqqq">FindDoctor doktorlarının makalelerini, raporlarını ve çalışmalarını okuyabilirsiniz.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-9" id="asd">
+               
+
+                    @foreach (var item in Model.BlogList.Take(3))
+                    {
+
+                        <article class="blog wow fadeIn">
+
+
+                            <div class="row no-gutters">
+                                <div class="col-lg-7">
+                                    <figure>
+                                        <a href="~/Details/BlogText/@item.Id"><img width="400" height="400" src="@item.ImageUrl" alt=""><div class="preview"></div></a>
+                                    </figure>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="post_info">
+                                        <small>@item.Date</small>
+                                        <h3><a href="~/Details/BlogText/@item.Id">@item.Title</a></h3>
+                                        <p>@item.Text</p>
+
+                                        <ul>
+                                            <li>
+                                                @*<div class="thumb"><img width="100" height="50" src="@item.Doctors.ProfileImage" alt=""> @item.Doctors.Name</div>*@
+                                                <h6>@item.Doctors.Name - <i class="icon_comment_alt"></i> 20<h6>
+                                            </li>
+                                            @*<li><i class="icon_comment_alt"></i> 20</li>*@
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                    }
+
+
+                    @Ajax.ActionLink("Daha Fazla Yazı Göster", "BlogMore", "Details", new AjaxOptions()
+               {
+                   HttpMethod = "GET",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "asd"
+
+               }, new { @class = "btn_1 full-width" })
+                
+
+            </div>
+            <!-- /col -->
+
+            <aside class="col-lg-3">
+                @*<div class="widget">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+                        </div>
+                        <button type="submit" id="submit" class="btn_1"> Search</button>
+                        <hr />
+                    </form>
+                </div>*@
+                <!-- /widget -->
+
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4>En Güncel Yazılar</h4>
+                        <hr />
+                    </div>
+                    <ul class="comments-list">
+                        @foreach (var item in Model.BlogList.Take(3))
+                        {
+                            <li>
+                                <div class="alignleft">
+                                    <a href="~/Details/BlogText/@item.Id"><img width="200" height="120" src="@item.ImageUrl" alt=""></a>
+                                </div>
+                                <small>@item.Doctors.Name - @item.Date</small>
+                                <h3><a href="~/Details/BlogText/@item.Id" title="">@item.Title</a></h3>
+                                <hr />
+                            </li>
+                        }
+
+                        
+
+
+                    </ul>
+                </div>
+                <!-- /widget -->
+
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4>Blog Categories</h4>
+                    </div>
+                    <ul class="cats" id="ulcategories">
+                        @foreach (var item in Model.BlogCategories)
+                        {
+                        <li id="@item.Id"><h6><a>@item.CategoryName<span>( @item.Blog.Count )</span></a></h6></li>
+                        }
+                       
+                        
+
+                    </ul>
+                </div>
+                <!-- /widget -->
+
+                <script>
+
+                    $("#ulcategories li").click(function () {
+                        var blogid = this.id;
+
+                        $.ajax({
+                            url: '/Details/BlogPartial/'+blogid,
+                                        type: 'GET',
+                                        dataType: 'html'
+                                    })
+                                        .success(function (result) {
+                                            $('#asd').html(result);
+                                                })
+                                        .error(function (xhr, status) {
+                                                    alert(status);
+                                                })
+                    });
+
+
+                    @*$("#@Model.BlogCategories[1].Id").click(function () {
+                            alert("tıklandı.");
+
+                        });*@
+
+
+                </script>
+
+            </aside>
+            <!-- /aside -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</main>
+

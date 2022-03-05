@@ -1,0 +1,63 @@
+﻿@model PagedList.IPagedList<FindDoctor.Models.Favorites>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "PanelWhoAreFav";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        
+        <div class="box_general">
+            <div class="header_box">
+                <h2 class="d-inline-block">Kimlerin Listesindeyim</h2>
+                <div class="filter">
+                    <h6>Toplam @Model.TotalItemCount kişinin favorilerindesiniz.</h6>
+                </div>
+            </div>
+            <div class="list_general">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <figure><img src="@item.Members.ProfileImage" alt=""></figure>
+                            
+                            <h4>@item.Members.Name</h4>
+                            <p>@item.Members.Mail<br></p>
+                            @*<p><a href="#0" class="btn_1 gray"><i class="fa fa-fw fa-user"></i> View profile</a></p>*@
+                            @*<ul class="buttons">
+                                <li><a href="#0" class="btn_1 gray delete wishlist_close"><i class="fa fa-fw fa-times-circle-o"></i> Cancel</a></li>
+                            </ul>*@
+                        </li>
+                    }
+
+
+
+                </ul>
+
+            </div>
+
+        </div>
+        @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("PanelWhoAreFav", new { sayfa }),new PagedListRenderOptions { LiElementClasses=new List<string> {"page-link" } })
+        <!-- /box_general-->
+        @*<nav aria-label="...">
+            <ul class="pagination pagination-sm add_bottom_30">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>*@
+        <!-- /pagination-->
+    </div>
+    <!-- /container-fluid-->
+</div>
+

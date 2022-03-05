@@ -1,0 +1,60 @@
+﻿@model List<FindDoctor.Models.Blog>
+
+@{
+    ViewBag.Title = "PanelBlog";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        
+        <div class="box_general">
+            <div class="header_box">
+                <h2 class="d-inline-block">Yazılarım</h2>
+                <div class="filter">
+                    <h6>Toplam @Model.Count yazınız görüntüleniyor. </h6>
+                </div>
+            </div>
+            <div class="list_general">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <figure><img src="@item.ImageUrl" alt=""></figure>
+                            <small>@item.Date</small>
+                            <h4>@item.Title</h4>
+                            <small>@item.Text<br></small>
+                            <p><a href="~/Details/BlogText/@item.Id" class="btn_1 gray"><i class="fa fa-fw fa-user"></i>Yazıyı Görüntüle</a></p>
+                            <ul class="buttons">
+                                <li><a href="~/Details/DeleteBlog/@item.Id" class="btn_1 gray delete wishlist_close"><i class="fa fa-fw fa-times-circle-o"></i> Yazıyı Sil</a></li>
+                            </ul>
+                        </li>
+                    }
+                   
+
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- /box_general-->
+        @*<nav aria-label="...">
+            <ul class="pagination pagination-sm add_bottom_30">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>*@
+        <!-- /pagination-->
+    </div>
+    <!-- /container-fluid-->
+</div>
+
+

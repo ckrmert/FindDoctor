@@ -1,0 +1,60 @@
+﻿@model List<FindDoctor.Models.Orders>
+
+@{
+    ViewBag.Title = "PanelApprove";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+
+
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+     
+        <div class="box_general">
+            <div class="header_box">
+                <h2 class="d-inline-block">Randevular</h2>
+              
+            </div>
+
+            
+
+
+            <div class="list_general">
+                <ul >
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <figure><img src="@item.Members.ProfileImage" alt=""></figure>
+                            <h4>@item.Members.Name <i class="pending">Bekliyor</i></h4>
+                            <ul class="booking_details">
+                                <li><strong>Randevu tarihi:</strong><b> @item.Date</b></li>
+                                <li><strong>Randevu saati:</strong><b>@item.Time</b></li>
+                                <li><strong>Servis:</strong><b>@item.Prices.ServiceName</b></li>
+                                <li><strong>Fiyat:</strong><b>@item.Prices.Price ₺</b></li>
+
+                                <li><strong>Telefon:</strong><b>@item.Members.Phone</b></li>
+                                <li><strong>Email:</strong><b> @item.Members.Mail</b></li>
+                            </ul>
+                            <ul class="buttons">
+                                <li><a href="~/DoctorPanel/Approved/@item.Id" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Kabul Et</a></li>
+                                <li><a href="~/DoctorPanel/NotApproved/@item.Id" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> İptal Et</a></li>
+                            </ul>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+
+           
+        </div>
+        <!-- /box_general-->
+
+    </div>
+    <!-- /container-fluid-->
+</div>
+
+
+

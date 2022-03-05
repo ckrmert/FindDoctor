@@ -1,0 +1,990 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BlogId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="CContent" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VotePoint" Type="int" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Biography" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Phone" Type="int" Nullable="false" />
+          <Property Name="OfficePhone" Type="int" />
+          <Property Name="Viewed" Type="int" />
+          <Property Name="Patiens" Type="int" />
+          <Property Name="SpecializationId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="AverageVote" Type="int" />
+          <Property Name="TotalVote" Type="int" />
+          <Property Name="CanBlog" Type="bit" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JDoctorsSchools">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar" MaxLength="300" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="PriceId" Type="int" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CanComment" Type="bit" />
+          <Property Name="DidPay" Type="bit" />
+          <Property Name="IsApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schools">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specializations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Blog_BlogCategories">
+          <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="1" />
+          <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Blog_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogComments_Blog">
+          <End Role="Blog" Type="Self.Blog" Multiplicity="1" />
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogComments">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogComments_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogComments">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Specialization">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDoctorsSchools_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="JDoctorsSchools" Type="Self.JDoctorsSchools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JDoctorsSchools">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDoctorsSchools_Schools">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="1" />
+          <End Role="JDoctorsSchools" Type="Self.JDoctorsSchools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JDoctorsSchools">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Prices">
+          <End Role="Prices" Type="Self.Prices" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExDatabaseModelStoreContainer">
+          <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogCategories" EntityType="Self.BlogCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogComments" EntityType="Self.BlogComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JDoctorsSchools" EntityType="Self.JDoctorsSchools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prices" EntityType="Self.Prices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schools" EntityType="Self.Schools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specializations" EntityType="Self.Specializations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Blog_BlogCategories" Association="Self.FK_Blog_BlogCategories">
+            <End Role="BlogCategories" EntitySet="BlogCategories" />
+            <End Role="Blog" EntitySet="Blog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Blog_Doctors" Association="Self.FK_Blog_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Blog" EntitySet="Blog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogComments_Blog" Association="Self.FK_BlogComments_Blog">
+            <End Role="Blog" EntitySet="Blog" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogComments_Members" Association="Self.FK_BlogComments_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Doctors" Association="Self.FK_Comments_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Members" Association="Self.FK_Comments_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Cities" Association="Self.FK_Doctors_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Specialization" Association="Self.FK_Doctors_Specialization">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_Doctors" Association="Self.FK_Favorites_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_Members" Association="Self.FK_Favorites_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDoctorsSchools_Doctors" Association="Self.FK_JDoctorsSchools_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="JDoctorsSchools" EntitySet="JDoctorsSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDoctorsSchools_Schools" Association="Self.FK_JDoctorsSchools_Schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="JDoctorsSchools" EntitySet="JDoctorsSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Members" Association="Self.FK_Orders_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Prices" Association="Self.FK_Orders_Prices">
+            <End Role="Prices" EntitySet="Prices" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Doctors" Association="Self.FK_Prices_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="ExDatabaseModel.FK_Favorites_Members" FromRole="Favorites" ToRole="Members" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_Favorites_Doctors" FromRole="Favorites" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_Prices_Doctors" FromRole="Prices" ToRole="Doctors" />
+          <NavigationProperty Name="Orders" Relationship="ExDatabaseModel.FK_Orders_Prices" FromRole="Prices" ToRole="Orders" />
+        </EntityType>
+        <EntityContainer Name="ExDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" />
+          <EntitySet Name="Prices" EntityType="Self.Prices" />
+          <EntitySet Name="Members" EntityType="ExDatabaseModel.Members" />
+          <AssociationSet Name="FK_Favorites_Members" Association="ExDatabaseModel.FK_Favorites_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <EntitySet Name="Cities" EntityType="ExDatabaseModel.Cities" />
+          <EntitySet Name="Specializations" EntityType="ExDatabaseModel.Specializations" />
+          <EntitySet Name="JDoctorsSchools" EntityType="ExDatabaseModel.JDoctorsSchools" />
+          <EntitySet Name="Schools" EntityType="ExDatabaseModel.Schools" />
+          <AssociationSet Name="FK_JDoctorsSchools_Schools" Association="ExDatabaseModel.FK_JDoctorsSchools_Schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="JDoctorsSchools" EntitySet="JDoctorsSchools" />
+          </AssociationSet>
+          <EntitySet Name="Blog" EntityType="ExDatabaseModel.Blog" />
+          <EntitySet Name="BlogCategories" EntityType="ExDatabaseModel.BlogCategories" />
+          <EntitySet Name="BlogComments" EntityType="ExDatabaseModel.BlogComments" />
+          <AssociationSet Name="FK_Blog_BlogCategories" Association="ExDatabaseModel.FK_Blog_BlogCategories">
+            <End Role="BlogCategories" EntitySet="BlogCategories" />
+            <End Role="Blog" EntitySet="Blog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogComments_Blog" Association="ExDatabaseModel.FK_BlogComments_Blog">
+            <End Role="Blog" EntitySet="Blog" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BlogComments_Members" Association="ExDatabaseModel.FK_BlogComments_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <EntitySet Name="Doctors" EntityType="ExDatabaseModel.Doctors" />
+          <AssociationSet Name="FK_Blog_Doctors" Association="ExDatabaseModel.FK_Blog_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Blog" EntitySet="Blog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Cities" Association="ExDatabaseModel.FK_Doctors_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Specialization" Association="ExDatabaseModel.FK_Doctors_Specialization">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorites_Doctors" Association="ExDatabaseModel.FK_Favorites_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDoctorsSchools_Doctors" Association="ExDatabaseModel.FK_JDoctorsSchools_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="JDoctorsSchools" EntitySet="JDoctorsSchools" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Doctors" Association="ExDatabaseModel.FK_Prices_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="ExDatabaseModel.Orders" />
+          <AssociationSet Name="FK_Orders_Members" Association="ExDatabaseModel.FK_Orders_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Prices" Association="ExDatabaseModel.FK_Orders_Prices">
+            <End Role="Prices" EntitySet="Prices" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="ExDatabaseModel.Comments" />
+          <AssociationSet Name="FK_Comments_Doctors" Association="ExDatabaseModel.FK_Comments_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Members" Association="ExDatabaseModel.FK_Comments_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Favorites" Relationship="ExDatabaseModel.FK_Favorites_Members" FromRole="Members" ToRole="Favorites" />
+          <NavigationProperty Name="BlogComments" Relationship="ExDatabaseModel.FK_BlogComments_Members" FromRole="Members" ToRole="BlogComments" />
+          <NavigationProperty Name="Orders" Relationship="ExDatabaseModel.FK_Orders_Members" FromRole="Members" ToRole="Orders" />
+          <NavigationProperty Name="Comments" Relationship="ExDatabaseModel.FK_Comments_Members" FromRole="Members" ToRole="Comments" />
+        </EntityType>
+        <Association Name="FK_Favorites_Members">
+          <End Type="ExDatabaseModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Favorites" Role="Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_Doctors_Cities" FromRole="Cities" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Specializations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_Doctors_Specialization" FromRole="Specializations" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="JDoctorsSchools">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Schools" Relationship="ExDatabaseModel.FK_JDoctorsSchools_Schools" FromRole="JDoctorsSchools" ToRole="Schools" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_JDoctorsSchools_Doctors" FromRole="JDoctorsSchools" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Schools">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JDoctorsSchools" Relationship="ExDatabaseModel.FK_JDoctorsSchools_Schools" FromRole="Schools" ToRole="JDoctorsSchools" />
+        </EntityType>
+        <Association Name="FK_JDoctorsSchools_Schools">
+          <End Type="ExDatabaseModel.Schools" Role="Schools" Multiplicity="1" />
+          <End Type="ExDatabaseModel.JDoctorsSchools" Role="JDoctorsSchools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JDoctorsSchools">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BlogCategories" Relationship="ExDatabaseModel.FK_Blog_BlogCategories" FromRole="Blog" ToRole="BlogCategories" />
+          <NavigationProperty Name="BlogComments" Relationship="ExDatabaseModel.FK_BlogComments_Blog" FromRole="Blog" ToRole="BlogComments" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_Blog_Doctors" FromRole="Blog" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="BlogCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Blog" Relationship="ExDatabaseModel.FK_Blog_BlogCategories" FromRole="BlogCategories" ToRole="Blog" />
+        </EntityType>
+        <EntityType Name="BlogComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BlogId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Blog" Relationship="ExDatabaseModel.FK_BlogComments_Blog" FromRole="BlogComments" ToRole="Blog" />
+          <NavigationProperty Name="Members" Relationship="ExDatabaseModel.FK_BlogComments_Members" FromRole="BlogComments" ToRole="Members" />
+        </EntityType>
+        <Association Name="FK_Blog_BlogCategories">
+          <End Type="ExDatabaseModel.BlogCategories" Role="BlogCategories" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogCategories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogComments_Blog">
+          <End Type="ExDatabaseModel.Blog" Role="Blog" Multiplicity="1" />
+          <End Type="ExDatabaseModel.BlogComments" Role="BlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogComments">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BlogComments_Members">
+          <End Type="ExDatabaseModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="ExDatabaseModel.BlogComments" Role="BlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BlogComments">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Biography" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <Property Name="OfficePhone" Type="Int32" />
+          <Property Name="Viewed" Type="Int32" />
+          <Property Name="Patiens" Type="Int32" />
+          <Property Name="SpecializationId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AverageVote" Type="Int32" />
+          <Property Name="TotalVote" Type="Int32" />
+          <Property Name="CanBlog" Type="Boolean" />
+          <NavigationProperty Name="Blog" Relationship="ExDatabaseModel.FK_Blog_Doctors" FromRole="Doctors" ToRole="Blog" />
+          <NavigationProperty Name="Cities" Relationship="ExDatabaseModel.FK_Doctors_Cities" FromRole="Doctors" ToRole="Cities" />
+          <NavigationProperty Name="Specializations" Relationship="ExDatabaseModel.FK_Doctors_Specialization" FromRole="Doctors" ToRole="Specializations" />
+          <NavigationProperty Name="Favorites" Relationship="ExDatabaseModel.FK_Favorites_Doctors" FromRole="Doctors" ToRole="Favorites" />
+          <NavigationProperty Name="JDoctorsSchools" Relationship="ExDatabaseModel.FK_JDoctorsSchools_Doctors" FromRole="Doctors" ToRole="JDoctorsSchools" />
+          <NavigationProperty Name="Prices" Relationship="ExDatabaseModel.FK_Prices_Doctors" FromRole="Doctors" ToRole="Prices" />
+          <NavigationProperty Name="Comments" Relationship="ExDatabaseModel.FK_Comments_Doctors" FromRole="Doctors" ToRole="Comments" />
+        </EntityType>
+        <Association Name="FK_Blog_Doctors">
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Cities">
+          <End Type="ExDatabaseModel.Cities" Role="Cities" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Specialization">
+          <End Type="ExDatabaseModel.Specializations" Role="Specializations" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorites_Doctors">
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Favorites" Role="Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDoctorsSchools_Doctors">
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="1" />
+          <End Type="ExDatabaseModel.JDoctorsSchools" Role="JDoctorsSchools" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JDoctorsSchools">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Doctors">
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Prices" Role="Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="PriceId" Type="Int32" Nullable="false" />
+          <Property Name="IsChecked" Type="Boolean" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CanComment" Type="Boolean" />
+          <Property Name="DidPay" Type="Boolean" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <NavigationProperty Name="Members" Relationship="ExDatabaseModel.FK_Orders_Members" FromRole="Orders" ToRole="Members" />
+          <NavigationProperty Name="Prices" Relationship="ExDatabaseModel.FK_Orders_Prices" FromRole="Orders" ToRole="Prices" />
+        </EntityType>
+        <Association Name="FK_Orders_Members">
+          <End Type="ExDatabaseModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Prices">
+          <End Type="ExDatabaseModel.Prices" Role="Prices" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="CContent" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VotePoint" Type="Int32" />
+          <NavigationProperty Name="Doctors" Relationship="ExDatabaseModel.FK_Comments_Doctors" FromRole="Comments" ToRole="Doctors" />
+          <NavigationProperty Name="Members" Relationship="ExDatabaseModel.FK_Comments_Members" FromRole="Comments" ToRole="Members" />
+        </EntityType>
+        <Association Name="FK_Comments_Doctors">
+          <End Type="ExDatabaseModel.Doctors" Role="Doctors" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Members">
+          <End Type="ExDatabaseModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="ExDatabaseModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExDatabaseModelStoreContainer" CdmEntityContainer="ExDatabaseEntities">
+          <EntitySetMapping Name="Favorites">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Favorites">
+              <MappingFragment StoreEntitySet="Favorites">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Prices">
+              <MappingFragment StoreEntitySet="Prices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Members">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specializations">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Specializations">
+              <MappingFragment StoreEntitySet="Specializations">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JDoctorsSchools">
+            <EntityTypeMapping TypeName="ExDatabaseModel.JDoctorsSchools">
+              <MappingFragment StoreEntitySet="JDoctorsSchools">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Schools">
+              <MappingFragment StoreEntitySet="Schools">
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blog">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Blog">
+              <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogCategories">
+            <EntityTypeMapping TypeName="ExDatabaseModel.BlogCategories">
+              <MappingFragment StoreEntitySet="BlogCategories">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogComments">
+            <EntityTypeMapping TypeName="ExDatabaseModel.BlogComments">
+              <MappingFragment StoreEntitySet="BlogComments">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="BlogId" ColumnName="BlogId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Doctors">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="CanBlog" ColumnName="CanBlog" />
+                <ScalarProperty Name="TotalVote" ColumnName="TotalVote" />
+                <ScalarProperty Name="AverageVote" ColumnName="AverageVote" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+                <ScalarProperty Name="Patiens" ColumnName="Patiens" />
+                <ScalarProperty Name="Viewed" ColumnName="Viewed" />
+                <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="DidPay" ColumnName="DidPay" />
+                <ScalarProperty Name="CanComment" ColumnName="CanComment" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="ExDatabaseModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="VotePoint" ColumnName="VotePoint" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CContent" ColumnName="CContent" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

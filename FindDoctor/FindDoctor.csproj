@@ -1,0 +1,775 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83AE0F62-A60F-4B82-81DB-08B003642B5A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FindDoctor</RootNamespace>
+    <AssemblyName>FindDoctor</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44344</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\booking.php" />
+    <Content Include="assets\contact.php" />
+    <Content Include="assets\register_doctor.php" />
+    <Content Include="assets\validate.js" />
+    <Content Include="coming_soon\assets\newsletter.php" />
+    <Content Include="coming_soon\assets\validate.js" />
+    <Content Include="coming_soon\css\bootstrap.css" />
+    <Content Include="coming_soon\css\bootstrap.min.css" />
+    <Content Include="coming_soon\css\style.css" />
+    <Content Include="coming_soon\fontello\css\animation.css" />
+    <Content Include="coming_soon\fontello\css\fontello-codes.css" />
+    <Content Include="coming_soon\fontello\css\fontello-embedded.css" />
+    <Content Include="coming_soon\fontello\css\fontello-ie7-codes.css" />
+    <Content Include="coming_soon\fontello\css\fontello-ie7.css" />
+    <Content Include="coming_soon\fontello\css\fontello.css" />
+    <Content Include="coming_soon\fontello\demo.html" />
+    <Content Include="coming_soon\fontello\font\fontello.svg" />
+    <Content Include="coming_soon\fontello\LICENSE.txt" />
+    <Content Include="coming_soon\fontello\README.txt" />
+    <Content Include="coming_soon\img\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="coming_soon\img\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="coming_soon\img\apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="coming_soon\img\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="coming_soon\img\favicon.ico" />
+    <Content Include="coming_soon\img\logo.png" />
+    <Content Include="coming_soon\img\logo_2x.png" />
+    <Content Include="coming_soon\img\slide_1.jpg" />
+    <Content Include="coming_soon\img\slide_2.jpg" />
+    <Content Include="coming_soon\index.html" />
+    <Content Include="coming_soon\js\bootstrap.js" />
+    <Content Include="coming_soon\js\bootstrap.min.js" />
+    <Content Include="coming_soon\js\functions.js" />
+    <Content Include="coming_soon\js\jquery-2.2.4.min.js" />
+    <Content Include="coming_soon\js\jquery.animate-enhanced.min.js" />
+    <Content Include="coming_soon\js\jquery.easing.1.3.js" />
+    <Content Include="coming_soon\js\jquery.easing.1.3.min.js" />
+    <Content Include="coming_soon\js\jquery.placeholder.js" />
+    <Content Include="coming_soon\js\jquery.placeholder.min.js" />
+    <Content Include="coming_soon\js\jquery.superslides.js" />
+    <Content Include="coming_soon\js\jquery.superslides.min.js" />
+    <Content Include="coming_soon\js\retina.min.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="css\ajax-loader.gif" />
+    <Content Include="css\blog.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\custom.css" />
+    <Content Include="css\datedropper.css" />
+    <Content Include="css\datedropper.min.css" />
+    <Content Include="css\date_picker.css" />
+    <Content Include="css\icon_fonts\css\all_icons.css" />
+    <Content Include="css\icon_fonts\css\all_icons_min.css" />
+    <Content Include="css\icon_fonts\css\fontello-codes.css" />
+    <Content Include="css\icon_fonts\css\icon_set_1.css" />
+    <Content Include="css\icon_fonts\css\icon_set_2.css" />
+    <Content Include="css\icon_fonts\css\icon_set_3.css" />
+    <Content Include="css\icon_fonts\demo_icon_set_1.html" />
+    <Content Include="css\icon_fonts\demo_icon_set_2.html" />
+    <Content Include="css\icon_fonts\demo_icon_set_3.html" />
+    <Content Include="css\icon_fonts\font\ElegantIcons.svg" />
+    <Content Include="css\icon_fonts\font\fontello.svg" />
+    <Content Include="css\icon_fonts\font\icon_set_1.svg" />
+    <Content Include="css\icon_fonts\font\Pe-icon-7-stroke.svg" />
+    <Content Include="css\menu.css" />
+    <Content Include="css\owl.video.play.png" />
+    <Content Include="css\src\datedropper.svg" />
+    <Content Include="css\style.css" />
+    <Content Include="css\tables.css" />
+    <Content Include="css\timedropper.css" />
+    <Content Include="css\timedropper.min.css" />
+    <Content Include="css\vendors.css" />
+    <Content Include="css\vendors.uncompressed.css" />
+    <Content Include="doctorpanelcss\css\admin.css" />
+    <Content Include="doctorpanelcss\css\custom.css" />
+    <Content Include="doctorpanelcss\img\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="doctorpanelcss\img\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="doctorpanelcss\img\apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="doctorpanelcss\img\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="doctorpanelcss\img\avatar1.jpg" />
+    <Content Include="doctorpanelcss\img\avatar2.jpg" />
+    <Content Include="doctorpanelcss\img\avatar3.jpg" />
+    <Content Include="doctorpanelcss\img\avatar4.jpg" />
+    <Content Include="doctorpanelcss\img\avatar5.jpg" />
+    <Content Include="doctorpanelcss\img\avatar6.jpg" />
+    <Content Include="doctorpanelcss\img\favicon.ico" />
+    <Content Include="doctorpanelcss\img\logo.png" />
+    <Content Include="doctorpanelcss\img\logo_2x.png" />
+    <Content Include="doctorpanelcss\js\admin-charts-all.js" />
+    <Content Include="doctorpanelcss\js\admin-charts.js" />
+    <Content Include="doctorpanelcss\js\admin-datatables.js" />
+    <Content Include="doctorpanelcss\js\admin.js" />
+    <Content Include="doctorpanelcss\vendor\animate.css" />
+    <Content Include="doctorpanelcss\vendor\animate.min.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="doctorpanelcss\vendor\chart.js\Chart.bundle.js" />
+    <Content Include="doctorpanelcss\vendor\chart.js\Chart.bundle.min.js" />
+    <Content Include="doctorpanelcss\vendor\chart.js\Chart.js" />
+    <Content Include="doctorpanelcss\vendor\chart.js\Chart.min.js" />
+    <Content Include="doctorpanelcss\vendor\datatables\dataTables.bootstrap4.css" />
+    <Content Include="doctorpanelcss\vendor\datatables\dataTables.bootstrap4.js" />
+    <Content Include="doctorpanelcss\vendor\datatables\jquery.dataTables.js" />
+    <Content Include="doctorpanelcss\vendor\dropzone.css" />
+    <Content Include="doctorpanelcss\vendor\dropzone.js" />
+    <Content Include="doctorpanelcss\vendor\dropzone.min.js" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="doctorpanelcss\vendor\jquery-easing\jquery.easing.compatibility.js" />
+    <Content Include="doctorpanelcss\vendor\jquery-easing\jquery.easing.js" />
+    <Content Include="doctorpanelcss\vendor\jquery-easing\jquery.easing.min.js" />
+    <Content Include="doctorpanelcss\vendor\jquery.magnific-popup.js" />
+    <Content Include="doctorpanelcss\vendor\jquery.magnific-popup.min.js" />
+    <Content Include="doctorpanelcss\vendor\jquery.selectbox-0.2.js" />
+    <Content Include="doctorpanelcss\vendor\jquery\jquery.js" />
+    <Content Include="doctorpanelcss\vendor\jquery\jquery.min.js" />
+    <Content Include="doctorpanelcss\vendor\magnific-popup.css" />
+    <Content Include="doctorpanelcss\vendor\retina-replace.js" />
+    <Content Include="doctorpanelcss\vendor\retina-replace.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Image\anony.png" />
+    <Content Include="img\apple-touch-icon-114x114-precomposed.png" />
+    <Content Include="img\apple-touch-icon-144x144-precomposed.png" />
+    <Content Include="img\apple-touch-icon-57x57-precomposed.png" />
+    <Content Include="img\apple-touch-icon-72x72-precomposed.png" />
+    <Content Include="img\apple_app.png" />
+    <Content Include="img\apple_app_2x.png" />
+    <Content Include="img\app_img.svg" />
+    <Content Include="img\arrow-gray-1.svg" />
+    <Content Include="img\arrow_down.svg" />
+    <Content Include="img\arrow_down_menu.svg" />
+    <Content Include="img\arrow_left.png" />
+    <Content Include="img\arrow_right.png" />
+    <Content Include="img\badges\badge_1.svg" />
+    <Content Include="img\badges\badge_2.svg" />
+    <Content Include="img\badges\badge_3.svg" />
+    <Content Include="img\badges\badge_4.svg" />
+    <Content Include="img\badges\badge_5.svg" />
+    <Content Include="img\badges\badge_6.svg" />
+    <Content Include="img\bg_2.png" />
+    <Content Include="img\bg_menu.png" />
+    <Content Include="img\checkbox.png" />
+    <Content Include="img\checkbox.svg" />
+    <Content Include="img\close_infobox.png" />
+    <Content Include="img\doctor_listing_1.jpg" />
+    <Content Include="img\favicon.ico" />
+    <Content Include="img\google_play_app.png" />
+    <Content Include="img\google_play_app_2x.png" />
+    <Content Include="img\hero_bg_1.svg" />
+    <Content Include="img\hero_home_bg_1.svg" />
+    <Content Include="img\icon-home-1.svg" />
+    <Content Include="img\icon-home-2.svg" />
+    <Content Include="img\icon-home-3.svg" />
+    <Content Include="img\icon_cat_1.svg" />
+    <Content Include="img\icon_cat_2.svg" />
+    <Content Include="img\icon_cat_3.svg" />
+    <Content Include="img\icon_cat_4.svg" />
+    <Content Include="img\icon_cat_5.svg" />
+    <Content Include="img\icon_cat_6.svg" />
+    <Content Include="img\icon_cat_7.svg" />
+    <Content Include="img\icon_cat_8.svg" />
+    <Content Include="img\icon_ccv.gif" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logo_2x.png" />
+    <Content Include="img\logo_no_name.svg" />
+    <Content Include="img\map-marker-contacts.png" />
+    <Content Include="img\map-marker.png" />
+    <Content Include="img\payments.png" />
+    <Content Include="img\payments_2x.png" />
+    <Content Include="img\paypal_bt.png" />
+    <Content Include="img\pins\Doctors.png" />
+    <Content Include="img\search.svg" />
+    <Content Include="img\select-icons.png" />
+    <Content Include="img\shadow_pic.png" />
+    <Content Include="img\small-arrow.svg" />
+    <Content Include="img\subheader_bg_1.png" />
+    <Content Include="img\video_fix.png" />
+    <Content Include="js\bootstrap-datepicker.js" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\common_scripts.js" />
+    <Content Include="js\common_scripts.min.js" />
+    <Content Include="js\datedropper.js" />
+    <Content Include="js\datedropper.min.js" />
+    <Content Include="js\functions.js" />
+    <Content Include="js\infobox.js" />
+    <Content Include="js\jquery-2.2.4.min.js" />
+    <Content Include="js\jquery.cookiebar.js" />
+    <Content Include="js\jquery.selectbox-0.2.js" />
+    <Content Include="js\mapmarker.jquery.js" />
+    <Content Include="js\mapmarker_contacts_func.js" />
+    <Content Include="js\mapmarker_func.jquery.js" />
+    <Content Include="js\map_listing.js" />
+    <Content Include="js\modernizr.js" />
+    <Content Include="js\modernizr_tables.js" />
+    <Content Include="js\owl.carousel.js" />
+    <Content Include="js\owl.carousel.min.js" />
+    <Content Include="js\pw_strenght.js" />
+    <Content Include="js\ResizeSensor.js" />
+    <Content Include="js\ResizeSensor.min.js" />
+    <Content Include="js\retina-replace.js" />
+    <Content Include="js\retina-replace.min.js" />
+    <Content Include="js\sticky-kit.js" />
+    <Content Include="js\sticky-kit.min.js" />
+    <Content Include="js\tables_func.js" />
+    <Content Include="js\tables_func_2.js" />
+    <Content Include="js\theia-sticky-sidebar.js" />
+    <Content Include="js\theia-sticky-sidebar.min.js" />
+    <Content Include="js\timedropper.js" />
+    <Content Include="js\timedropper.min.js" />
+    <Content Include="js\video_header.js" />
+    <Content Include="js\wow.js" />
+    <Content Include="js\wow.min.js" />
+    <Content Include="Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+    <Content Include="rev-slider-files\assets\100x50_364e0-37885311_ml.jpg" />
+    <Content Include="rev-slider-files\assets\100x50_4e36b-42512211_ml.jpg" />
+    <Content Include="rev-slider-files\assets\100x50_b9dee-42512210_ml.jpg" />
+    <Content Include="rev-slider-files\assets\364e0-37885311_ml.jpg" />
+    <Content Include="rev-slider-files\assets\4e36b-42512211_ml.jpg" />
+    <Content Include="rev-slider-files\assets\b9dee-42512210_ml.jpg" />
+    <Content Include="rev-slider-files\assets\loader.gif" />
+    <Content Include="rev-slider-files\css\settings.css" />
+    <Content Include="rev-slider-files\fonts\font-awesome\css\font-awesome.css" />
+    <Content Include="rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="rev-slider-files\fonts\pe-icon-7-stroke\css\helper.css" />
+    <Content Include="rev-slider-files\fonts\pe-icon-7-stroke\css\pe-icon-7-stroke.css" />
+    <Content Include="rev-slider-files\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="rev-slider-files\fonts\revicons\revicons.svg" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="rev-slider-files\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="rev-slider-files\js\jquery.revslider-doctor_slider_1.js" />
+    <Content Include="rev-slider-files\js\jquery.revslider.embed.js" />
+    <Content Include="rev-slider-files\js\jquery.themepunch.enablelog.js" />
+    <Content Include="rev-slider-files\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="rev-slider-files\js\jquery.themepunch.tools.min.js" />
+    <Content Include="sass\compass_app_log.txt" />
+    <Content Include="doctorpanelcss\css\.DS_Store" />
+    <Content Include="doctorpanelcss\js\.DS_Store" />
+    <Content Include="doctorpanelcss\scss\.DS_Store" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\admin.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\sb-admin.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_cards.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_footer.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_global.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_login.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_mixins.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_utilities.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\8397aaa9b962e8ccb4dc67d257e0efda3f539661\_variables.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\b67c63e90585d4bb17d3a8c18a973c05796be1ef\_navbar_colors.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\b67c63e90585d4bb17d3a8c18a973c05796be1ef\_navbar_fixed.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\b67c63e90585d4bb17d3a8c18a973c05796be1ef\_navbar_global.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\b67c63e90585d4bb17d3a8c18a973c05796be1ef\_navbar_static.scssc" />
+    <Content Include="doctorpanelcss\scss\.sass-cache\b67c63e90585d4bb17d3a8c18a973c05796be1ef\_navbar_toggle.scssc" />
+    <Content Include="doctorpanelcss\scss\admin.scss" />
+    <Content Include="doctorpanelcss\scss\config.rb" />
+    <Content Include="doctorpanelcss\scss\navbar\_navbar_colors.scss" />
+    <Content Include="doctorpanelcss\scss\navbar\_navbar_fixed.scss" />
+    <Content Include="doctorpanelcss\scss\navbar\_navbar_global.scss" />
+    <Content Include="doctorpanelcss\scss\navbar\_navbar_static.scss" />
+    <Content Include="doctorpanelcss\scss\navbar\_navbar_toggle.scss" />
+    <Content Include="doctorpanelcss\scss\_cards.scss" />
+    <Content Include="doctorpanelcss\scss\_footer.scss" />
+    <Content Include="doctorpanelcss\scss\_global.scss" />
+    <Content Include="doctorpanelcss\scss\_mixins.scss" />
+    <Content Include="doctorpanelcss\scss\_utilities.scss" />
+    <Content Include="doctorpanelcss\scss\_variables.scss" />
+    <Content Include="doctorpanelcss\vendor\.DS_Store" />
+    <Content Include="doctorpanelcss\vendor\bootstrap\.DS_Store" />
+    <Content Include="doctorpanelcss\vendor\chart.js\.DS_Store" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\animated.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\core.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\icons.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\larger.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\list.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\mixins.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\path.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\stacked.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\less\variables.less" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="doctorpanelcss\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="doctorpanelcss\.DS_Store" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\Blog.cs" />
+    <Compile Include="Classes\CityAndSpec.cs" />
+    <Compile Include="Classes\DoctorPanel.cs" />
+    <Compile Include="Classes\DoctorPrivate.cs" />
+    <Compile Include="Classes\DoctorProfile.cs" />
+    <Compile Include="Classes\FilterInCity.cs" />
+    <Compile Include="Classes\PanelMain.cs" />
+    <Compile Include="Classes\Password.cs" />
+    <Compile Include="Controllers\DetailsController.cs" />
+    <Compile Include="Controllers\DoctorPanelController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\sadController.cs" />
+    <Compile Include="Core 5.0\Data\data.cs" />
+    <Compile Include="Core 5.0\Entities\entities.cs" />
+    <Compile Include="Core 5.0\Services\services.cs" />
+    <Compile Include="Core 5.0\Shared\shared.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Blog.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BlogCategories.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BlogComments.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cities.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comments.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Doctors.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Favorites.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JDoctorsSchools.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Members.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Prices.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Schools.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Specializations.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="assets\.DS_Store" />
+    <Content Include="coming_soon\.DS_Store" />
+    <Content Include="coming_soon\assets\.DS_Store" />
+    <Content Include="coming_soon\css\.DS_Store" />
+    <Content Include="coming_soon\fontello\.DS_Store" />
+    <Content Include="coming_soon\fontello\config.json" />
+    <Content Include="coming_soon\fontello\font\fontello.eot" />
+    <Content Include="coming_soon\fontello\font\fontello.ttf" />
+    <Content Include="coming_soon\fontello\font\fontello.woff" />
+    <Content Include="coming_soon\img\.DS_Store" />
+    <Content Include="coming_soon\js\.DS_Store" />
+    <Content Include="css\.DS_Store" />
+    <Content Include="css\icon_fonts\.DS_Store" />
+    <Content Include="css\icon_fonts\css\.DS_Store" />
+    <Content Include="css\icon_fonts\font\.DS_Store" />
+    <Content Include="css\icon_fonts\font\ElegantIcons.eot" />
+    <Content Include="css\icon_fonts\font\ElegantIcons.ttf" />
+    <Content Include="css\icon_fonts\font\ElegantIcons.woff" />
+    <Content Include="css\icon_fonts\font\fontello.eot" />
+    <Content Include="css\icon_fonts\font\fontello.ttf" />
+    <Content Include="css\icon_fonts\font\fontello.woff" />
+    <Content Include="css\icon_fonts\font\icon_set_1.eot" />
+    <Content Include="css\icon_fonts\font\icon_set_1.ttf" />
+    <Content Include="css\icon_fonts\font\icon_set_1.woff" />
+    <Content Include="css\icon_fonts\font\Pe-icon-7-stroke.eot" />
+    <Content Include="css\icon_fonts\font\Pe-icon-7-stroke.ttf" />
+    <Content Include="css\icon_fonts\font\Pe-icon-7-stroke.woff" />
+    <Content Include="css\src\datedropper.eot" />
+    <Content Include="css\src\datedropper.ttf" />
+    <Content Include="css\src\datedropper.woff" />
+    <Content Include="img\.DS_Store" />
+    <Content Include="img\badges\.DS_Store" />
+    <Content Include="img\pins\.DS_Store" />
+    <Content Include="js\.DS_Store" />
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="rev-slider-files\.DS_Store" />
+    <Content Include="rev-slider-files\assets\.DS_Store" />
+    <Content Include="rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="rev-slider-files\fonts\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="rev-slider-files\fonts\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="rev-slider-files\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="rev-slider-files\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="rev-slider-files\fonts\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="rev-slider-files\fonts\revicons\revicons.eot" />
+    <Content Include="rev-slider-files\fonts\revicons\revicons.ttf" />
+    <Content Include="rev-slider-files\fonts\revicons\revicons.woff" />
+    <Content Include="sass\.DS_Store" />
+    <Content Include="sass\.sass-cache\04295a9b4e07da3e6acaee689729ddc2abfea753\blog.scssc" />
+    <Content Include="sass\.sass-cache\04295a9b4e07da3e6acaee689729ddc2abfea753\menu.scssc" />
+    <Content Include="sass\.sass-cache\04295a9b4e07da3e6acaee689729ddc2abfea753\style.scssc" />
+    <Content Include="sass\.sass-cache\04295a9b4e07da3e6acaee689729ddc2abfea753\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\04295a9b4e07da3e6acaee689729ddc2abfea753\_variables.scssc" />
+    <Content Include="sass\.sass-cache\332eb9fa5bb2fdadd6bfc3d8b7649f731dfc22cf\blog.scssc" />
+    <Content Include="sass\.sass-cache\332eb9fa5bb2fdadd6bfc3d8b7649f731dfc22cf\menu.scssc" />
+    <Content Include="sass\.sass-cache\332eb9fa5bb2fdadd6bfc3d8b7649f731dfc22cf\style.scssc" />
+    <Content Include="sass\.sass-cache\332eb9fa5bb2fdadd6bfc3d8b7649f731dfc22cf\_mixin.scssc" />
+    <Content Include="sass\.sass-cache\332eb9fa5bb2fdadd6bfc3d8b7649f731dfc22cf\_variables.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\blog.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\menu.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\style.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\tables.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\_layout.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\388fddd84db8741fae2e979a7578a2375ab07c30\_variables.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\blog.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\menu.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\style.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\tables.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\_layout.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\5016a607b625efa03bbac5562d995436790f65e0\_variables.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\blog.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\menu.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\style.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\tables.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\_layout.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\5d39636c43236534dab135c424c090b09ea5541c\_variables.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\blog.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\menu.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\style.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\tables.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\_layout.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\_mixin.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\6ed85ec53a2dedcd2be97cfc48e94ddb0aefea36\_variables.scssc" />
+    <Content Include="sass\.sass-cache\90119e0cf6c77a49d01fc7586d98e6e5057b9659\blog.scssc" />
+    <Content Include="sass\.sass-cache\90119e0cf6c77a49d01fc7586d98e6e5057b9659\menu.scssc" />
+    <Content Include="sass\.sass-cache\90119e0cf6c77a49d01fc7586d98e6e5057b9659\style.scssc" />
+    <Content Include="sass\.sass-cache\90119e0cf6c77a49d01fc7586d98e6e5057b9659\_mixin.scssc" />
+    <Content Include="sass\.sass-cache\90119e0cf6c77a49d01fc7586d98e6e5057b9659\_variables.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\blog.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\menu.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\style.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\tables.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\_layout.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\b37801314aa1c42dbdd8c2d1c311c28be01cc473\_variables.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\blog.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\menu.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\style.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\tables.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\_layout.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\_mixins.scssc" />
+    <Content Include="sass\.sass-cache\c31c3eeb85bd0745f42cb1f4060f338618efcad7\_variables.scssc" />
+    <Content Include="sass\blog.scss" />
+    <Content Include="sass\config.rb" />
+    <Content Include="sass\menu.scss" />
+    <Content Include="sass\style.scss" />
+    <Content Include="sass\tables.scss" />
+    <Content Include="sass\_layout.scss" />
+    <Content Include="sass\_mixins.scss" />
+    <Content Include="sass\_variables.scss" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\RegisterDoctor.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\LoginDoctor.cshtml" />
+    <Content Include="Views\Details\ListOfDoctors.cshtml" />
+    <Content Include="Views\Home\ListCity.cshtml" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Details\_MostViewed.cshtml" />
+    <Content Include="Views\Details\_BestRated.cshtml" />
+    <Content Include="Views\Details\_MostPatiens.cshtml" />
+    <Content Include="Views\Details\DoctorPrivate.cshtml" />
+    <Content Include="Views\Details\ListOfDoctorsUnit.cshtml" />
+    <Content Include="Views\Details\Payment.cshtml" />
+    <Content Include="Views\Details\Blogs.cshtml" />
+    <Content Include="Views\Details\BlogMore.cshtml" />
+    <Content Include="Views\Details\_BlogPartial.cshtml" />
+    <Content Include="Views\Details\BlogText.cshtml" />
+    <Content Include="Views\Home\UserFavorites.cshtml" />
+    <Content Include="Views\Shared\_DoctorLayout.cshtml" />
+    <Content Include="Views\DoctorPanel\Index.cshtml" />
+    <Content Include="Views\DoctorPanel\DoctorProfile.cshtml" />
+    <Content Include="Views\DoctorPanel\PanelComments.cshtml" />
+    <Content Include="Views\DoctorPanel\PanelWhoAreFav.cshtml" />
+    <Content Include="Views\DoctorPanel\PanelBlog.cshtml" />
+    <Content Include="Views\Details\AddBlog.cshtml" />
+    <Content Include="Views\DoctorPanel\PanelAllDoctors.cshtml" />
+    <Content Include="Views\DoctorPanel\PanelApprove.cshtml" />
+    <Content Include="Views\DoctorPanel\_Now.cshtml" />
+    <Content Include="Views\DoctorPanel\PanelAllOrders.cshtml" />
+    <Content Include="Views\sad\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49187</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44344/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

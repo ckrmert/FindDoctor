@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<FindDoctor.Models.Doctors>
+
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    double av;
+}
+@foreach (var item in Model)
+{
+    av = (double)Convert.ToInt32(item.AverageVote) / Convert.ToInt32(item.TotalVote);
+    <div class="strip_list wow fadeIn">
+        
+        <figure>
+            <a href="/Details/DoctorPrivate/@item.Id"><img src="@item.ProfileImage" alt=""></a>
+        </figure>
+        <small>@item.Specializations.Name</small>
+        <h3>@item.Name</h3>
+
+        <p>@item.Biography</p>
+        <span class="rating">
+            @for (int i = 0; i < @Math.Round(av, MidpointRounding.AwayFromZero); i++)
+            {
+                <i class="icon_star voted"></i>
+            }
+            @for (int i = 0; i < 5 - @Math.Round(av, MidpointRounding.AwayFromZero); i++)
+            {
+                <i class="icon_star"></i>
+            }
+
+            <small>@item.TotalVote</small>
+        </span>
+
+        <a href="badges.html" data-toggle="tooltip" data-placement="top" data-original-title="Badge Level" class="badge_list_1"><img src="~/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
+        <ul>
+            <li><a href="#0" onclick="onHtmlClick('Doctors', 0)" class="btn_listing">View on Map</a></li>
+            <li><a href="https://www.google.com/maps/place/Denizk%C3%B6%C5%9Fkler" target="_blank">Directions</a></li>
+            <li><a href="detail-page.html">Book now</a></li>
+        </ul>
+    </div>
+}
+
+
+
+
+
+
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("ListOfDoctors/" + Model[0].CityId, new { sayfa }), new PagedListRenderOptions { LiElementClasses = new List<string> { "page-link" } })

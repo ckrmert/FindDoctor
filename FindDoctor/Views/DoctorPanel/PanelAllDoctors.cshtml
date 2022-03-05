@@ -1,0 +1,75 @@
+﻿
+@model List<FindDoctor.Models.Doctors>
+
+@{
+    ViewBag.Title = "PanelAllDoctors";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<head>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        
+        <!-- Example DataTables Card-->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Doktorlar
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>İsim</th>
+                                <th>Birim</th>
+                                <th>Adres</th>
+                                <th>Telefon</th>
+                                <th>Mail</th>
+                                <th>Görüntülenme</th>
+                            </tr>
+                        </thead>
+                      
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Specializations.Name</td>
+                                    <td>@item.Adress</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Mail</td>
+                                    <td>@item.Viewed</td>
+                                </tr>
+                            }
+                           
+                           
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+        <!-- /tables-->
+    </div>
+    <!-- /container-fluid-->
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            "paging": true // false to disable pagination (or any other option)
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>

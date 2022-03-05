@@ -1,0 +1,70 @@
+﻿@model FindDoctor.Classes.Blog
+
+@{
+    FindDoctor.Models.Doctors LogonDoctor = (FindDoctor.Models.Doctors)Session["LogonDoctor"];
+}
+
+@{
+    ViewBag.Title = "AddBlog";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        
+        @using (Html.BeginForm("AddBlog", "Details", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+        <div class="box_general padding_bottom">
+            <div class="header_box version_2">
+                <h2><i class="fa fa-file-text"></i>Yazı Ekle</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Başlık <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
+                        @Html.TextAreaFor(x => x.Blog1.Title, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>İçerik</label>
+                        @Html.TextAreaFor(x => x.Blog1.Text, new { @class = "form-control", @style = "height:500px", placeholder = "İçeriği buraya yazınız.", required = "required" })
+
+                    </div>
+                </div>
+            </div>
+            <!-- /row-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Kategori <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.Blog1.CategoryId, (List<SelectListItem>)ViewBag.CategoryNames, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Fotoğraf <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
+                        <div class="form-group">
+                            <input type="file" name="ImageUrl" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /row-->
+        </div>
+        <!-- /box_general-->
+
+
+        <!-- /box_general-->
+        <button type="submit" class="btn_1 medium">Gönder</button>
+        }
+    </div>
+    <!-- /.container-fluid-->
+</div>

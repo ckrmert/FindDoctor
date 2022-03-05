@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FindDoctor.Models.Cities>
+
+@{
+    Layout = null;
+}
+
+<link href="~/Content/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css"/>
+<script src="~/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#txtSearch").autocomplete({
+            source: '@Url.Action("GetStudents")'
+
+        });
+
+    });
+
+</script>
+<div>
+
+    @using (Html.BeginForm())
+    {
+
+        <b>ARA</b>
+        @Html.TextBox("searchTerm", null, new { id = "txtSearch" })
+
+        <input type="submit" value="Search" />
+    }
+
+    @foreach (var item in Model)
+    {
+        <p>@item.Name</p>
+    }
+</div>

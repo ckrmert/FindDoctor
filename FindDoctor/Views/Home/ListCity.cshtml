@@ -1,0 +1,9 @@
+﻿@model List<FindDoctor.Models.Cities>
+
+
+        @foreach (var item in Model.ToList())
+        {
+            <li><a href="~/Details/ListOfDoctors/@item.Id"><strong>@item.Id</strong>@item.Name</a></li>
+        }
+
+    

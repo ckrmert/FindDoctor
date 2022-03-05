@@ -1,0 +1,70 @@
+﻿@model FindDoctor.Models.Members
+
+@{
+    ViewBag.Title = "Kayıt Ol";
+}
+
+<body>
+
+    <main>
+        <div class="bg_color_2">
+            <div class="container margin_60_35">
+                <div id="register">
+                    <h1>FindDoctor'u Kullanmak İçin Kayıt Ol</h1>
+                    <h1 style="color:darkred">@ViewBag.Error</h1>
+                    <div class="row justify-content-center">
+                        <div class="col-md-5">
+                            @using(Html.BeginForm())
+                            {
+                            <div class="box_form">
+                                <div class="form-group">
+                                    <label>İsim</label>
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "İsminiz", type = "text", required = "required" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    @Html.TextBoxFor(x => x.Mail, new { @class = "form-control", placeholder = "Mail Adresiniz", type = "email", required = "required" })
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Telefon</label>
+                                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", placeholder = "Telefon Numaranız", type = "text", required = "required" })
+
+                                    <div class="form-group">
+                                        <label>Şifre</label>
+                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "Şifreniz", type = "password", required = "required" })
+
+                                    </div>   
+                                    
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Şifre Doğrulama</label>
+                                        <input type="password" class="form-control" name="textboxsifre" id="textboxemail" placeholder="Şifreyi Doğrulayınız">
+                                    </div>
+                               
+
+                            
+                                @Html.CheckBox("chc", true) &ensp; <label for="check_2"><span>Sözleşmeyi <strong>Okudum &amp; Onaylıyorum.</strong></span></label>
+                                
+                                
+                          
+                                   
+                                <div class="form-group text-center add_top_30">
+                                        <input class="btn_1" type="submit" value="Gönder">
+                                    </div>
+                                </div>
+                            }
+                            
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /register -->
+            </div>
+        </div>
+    </main>
+
+</body>
+
+<script src="~/js/pw_strenght.js"></script>

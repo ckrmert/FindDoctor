@@ -1,0 +1,195 @@
+﻿
+<!DOCTYPE html>
+@{
+    FindDoctor.Models.Doctors LogonDoctor = (FindDoctor.Models.Doctors)Session["LogonDoctor"];
+}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Ansonika">
+    <title>FINDOCTOR - Admin dashboard</title>
+
+    <!-- Favicons-->
+    <link rel="~/doctorpanelcss/shortcut icon" href="~/doctorpanelcss/img/favicon.ico" type="~/doctorpanelcss/image/x-icon">
+    <link rel="~/doctorpanelcss/apple-touch-icon" type="~/doctorpanelcss/image/x-icon" href="~/doctorpanelcss/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="~/doctorpanelcss/apple-touch-icon" type="~/doctorpanelcss/image/x-icon" sizes="72x72" href="~/doctorpanelcss/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="~/doctorpanelcss/apple-touch-icon" type="~/doctorpanelcss/image/x-icon" sizes="114x114" href="~/doctorpanelcss/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="~/doctorpanelcss/apple-touch-icon" type="~/doctorpanelcss/image/x-icon" sizes="144x144" href="~/doctorpanelcss/img/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- Bootstrap core CSS-->
+    <link href="~/doctorpanelcss/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icon fonts-->
+    <link href="~/doctorpanelcss/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Plugin styles -->
+    <link href="~/doctorpanelcss/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Main styles -->
+    <link href="~/doctorpanelcss/css/admin.css" rel="stylesheet">
+    <!-- Your custom styles -->
+    <link href="~/doctorpanelcss/css/admin.css" rel="stylesheet">
+
+</head>
+
+
+
+
+
+
+<body class="fixed-nav sticky-footer" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
+        <a class="navbar-brand" href="~/DoctorPanel/Index"><img src="/doctorpanelcss/img/logo.png" data-retina="true" alt="" width="163" height="36"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="~/DoctorPanel/Index">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Anasayfa</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My profile">
+                    <a href="~/DoctorPanel/DoctorProfile" class="nav-link">
+                        <i class="fa fa-fw fa-wrench"></i>
+                        <span class="nav-link-text">Profilim</span>
+
+                    </a>
+
+                </li>
+
+             
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseBookings" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-heart"></i>
+                        <span class="nav-link-text">Randevular</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseBookings">
+                        <li>
+                            <a  href="~/DoctorPanel/PanelApprove">Bekleyen Randevular</a>
+                        </li>
+                        <li>
+                            <a href="~/DoctorPanel/PanelAllOrders">Geçmiş Randevular</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
+                    <a href="~/DoctorPanel/PanelWhoAreFav/0" class="nav-link">
+                        <i class="fa fa-fw fa-star"></i>
+                        <span class="nav-link-text">Kimlerin Listesindeyim</span>
+                    </a>
+                </li>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
+                    <a href="~/DoctorPanel/PanelComments/0" class="nav-link">
+                        <i class="fa fa-fw fa-envelope-open"></i>
+                        <span class="nav-link-text">Gelen Yorumlar</span>
+                    </a>
+                </li>
+
+                @if (LogonDoctor.CanBlog == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponentss" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-heart"></i>
+                            <span class="nav-link-text">Blog</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponentss">
+                            <li>
+                                <a href="~/DoctorPanel/PanelBlog">Yazılarım</a>
+                            </li>
+                            <li>
+                                <a href="~/Details/AddBlog">Yeni Yazı Ekle</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+
+
+
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Messages">
+                    <a href="~/DoctorPanel/PanelAllDoctors" class="nav-link">
+                        <i class="fa fa-fw fa-gear"></i>
+                        <span class="nav-link-text">Bütün Doktorlar</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                @if (LogonDoctor != null)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                            <i></i>@LogonDoctor.Name
+                        </a>
+                    </li>
+                }
+
+
+                <li class="nav-item">
+                    <a href="~/Home/DoctorLogOut" class="nav-link">
+                        <i class="fa fa-fw fa-sign-out"></i>Çıkış Yap
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /Navigation-->
+
+    <main>
+        @RenderBody()
+
+    </main>
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="text-center">
+                <small>Copyright © FinDoctor 2017</small>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+    <script src="~/doctorpanelcss/vendor/jquery/jquery.min.js"></script>
+    <script src="~/doctorpanelcss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/doctorpanelcss/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/doctorpanelcss/vendor/chart.js/Chart.js"></script>
+    <script src="~/doctorpanelcss/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/doctorpanelcss/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/doctorpanelcss/vendor/jquery.selectbox-0.2.js"></script>
+    <script src="~/doctorpanelcss/vendor/retina-replace.min.js"></script>
+    <script src="~/doctorpanelcss/vendor/jquery.magnific-popup.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/doctorpanelcss/js/admin.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/doctorpanelcss/js/admin-charts.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+﻿@model FindDoctor.Classes.DoctorPanel
+
+@{
+    ViewBag.Title = "PanelComments";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+    
+        <div class="box_general">
+            <h4>Yorumlar</h4>
+            <div class="list_general">
+                <ul>
+                    @foreach (var item in Model.CommentsList)
+                    {
+                        <li>
+                            <span>@item.Date</span>
+                            <figure><img src="@item.Doctors.ProfileImage" alt=""></figure>
+                            <h4>@item.Members.Name <i class="read">Olumlu/Olumsuz</i></h4>
+                            <p>@item.CContent</p>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /box_general-->
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm add_bottom_30">
+                <li class="page-item disabled">
+                    @*<a class="page-link" href="#" tabindex="-1">Previous</a>*@
+                </li>
+                @{ 
+                    var x = Model.CommentsCount.Count / 5;
+
+
+                }
+                @for (int i = 0; i < x+1; i++)
+                {
+                    <li class="page-item"><a class="page-link" href="~/DoctorPanel/PanelComments/@i">@(i+1) </a></li>
+                }
+                @*<li class="page-item"><a class="page-link" href="~/DoctorPanel/PanelComments/0">1</a></li>
+                <li class="page-item"><a class="page-link" href="~/DoctorPanel/PanelComments/1">2</a></li>
+                <li class="page-item"><a class="page-link" href="~/DoctorPanel/PanelComments/2">3</a></li>*@
+                <li class="page-item">
+                    @*<a class="page-link" href="#">Next</a>*@
+                </li>
+            </ul>
+        </nav>
+        <!-- /pagination-->
+    </div>
+    <!-- /container-fluid-->
+</div>
+

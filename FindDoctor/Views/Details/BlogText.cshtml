@@ -1,0 +1,163 @@
+﻿@model FindDoctor.Classes.Blog
+
+@{
+    ViewBag.Title = "BlogText";
+}
+@{
+    FindDoctor.Models.Members LogonUser = (FindDoctor.Models.Members)Session["LogonUser"];
+}
+
+
+
+<head>
+
+    <link href="~/css/blog.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div class="layer"></div>
+    <!-- Mobile menu overlay mask -->
+
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div>
+    <!-- End Preload -->
+    <!-- /Header -->
+
+    <main>
+
+        <!-- /breadcrumb -->
+
+        <div class="container margin_60">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="bloglist singlepost">
+                        <p><img width="620" height="200" alt="" class="img-fluid" src="@Model.Blog1.ImageUrl"></p>
+                        <h1>@Model.Blog1.Title</h1>
+                        <div class="postmeta">
+                            <ul>
+                                <li><a href="#"><i class="icon_folder-alt"></i> @Model.Blog1.BlogCategories.CategoryName</a></li>
+                                <li><a href="#"><i class="icon_clock_alt"></i> @Model.Blog1.Date</a></li>
+                                <li><a href="#"><i class="icon_pencil-edit"></i> @Model.Blog1.Doctors.Name</a></li>
+                                <li><a href="#"><i class="icon_comment_alt"></i> ( @Model.BlogComments.Count )</a></li>
+                            </ul>
+                        </div>
+                        <!-- /post meta -->
+                        <div class="post-content">
+                            <div class="dropcaps">
+                                <p>@Model.Blog1.Text</p>
+                            </div>
+
+                            <p></p>
+                        </div>
+                        <!-- /post -->
+                    </div>
+                    <!-- /single-post -->
+                    @{
+                        DateTime date = DateTime.Now;
+                    }
+
+                    <div id="comments">
+                        <h5>Yorumlar</h5>
+                        <ul>
+                            @foreach (var item in Model.BlogComments)
+                            {
+                                <li>
+                                    <div class="avatar">
+                                        <a>
+                                            <img width="150" height="250" src="@item.Members.ProfileImage" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="comment_right clearfix">
+                                        <div class="comment_info">
+                                            <b><a>@item.Members.Name</a></b><span>  |  </span>@item.Date
+                                        </div>
+                                       
+                                            <h4>
+                                            @item.Text</h4>
+                                       
+                                    </div>
+
+                                </li>
+                            }
+
+                         
+
+                        </ul>
+                    </div>
+
+                    <hr>
+                    @if (Session["LogonUser"] == null) { }
+
+                    else
+                    {
+
+
+                        <h4>Bu yazıya yorum yap</h4>
+                        <hr />
+                        using (Html.BeginForm("BlogText/"+Model.Blog1.Id,"Details",FormMethod.Post)) { 
+                        <div class="form-group">
+                            <input type="text" name="name" id="name2" class="form-control" placeholder="@LogonUser.Name" readonly="readonly">
+                        </div>
+
+
+                        <div class="form-group">
+                           
+                            @*<textarea class="form-control" name="txtcomment" id="comments2" rows="6" placeholder="Yorumunuzu yazınız."></textarea>*@
+                            @Html.TextAreaFor(x => x.ViewBlogComments.Text, new { @class = "form-control", placeholder = "Yorumunuzu buraya yazınız.", type = "text", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="submit2" class="btn_1"> Gönder</button>
+                        </div>
+                    }
+                    }
+                </div>
+                <!-- /col -->
+                <aside class="col-lg-3">
+
+
+
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>Aynı Kategorideki Diğer Yazılar</h4>
+                        </div>
+                        <ul class="comments-list">
+
+                            @foreach (var item in Model.BlogList)
+                            {
+                                if (item.Id != Model.Blog1.Id)
+                                {
+                                    <li>
+                                        <div class="alignleft">
+                                            <a href="~/Details/BlogText/@item.Id"><img src="@item.ImageUrl" alt=""></a>
+                                        </div>
+                                        <small>@item.Date</small>
+                                        <h3><a href="#" title="">@item.Title</a></h3>
+                                    </li>
+                                }
+
+                            }
+
+                        </ul>
+                    </div>
+                    <!-- /widget -->
+
+
+
+
+
+                </aside>
+
+                <!-- /aside -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </main>
+    <!-- /main -->
+
+
+</body>

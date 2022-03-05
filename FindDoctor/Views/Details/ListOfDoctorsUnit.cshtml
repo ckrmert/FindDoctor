@@ -1,0 +1,279 @@
+﻿@model PagedList.IPagedList<FindDoctor.Models.Doctors>
+@using PagedList
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "ListOfDoctorsUnit";
+}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Find easily a doctor and book online an appointment">
+    <meta name="author" content="Ansonika">
+    <title>FINDOCTOR - Find easily a doctor and book online an appointment</title>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+
+    <!-- Favicons-->
+    <link rel="~/shortcut icon" href="~/img/favicon.ico" type="~/image/x-icon">
+    <link rel="~/apple-touch-icon" type="~/image/x-icon" href="~/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="~/apple-touch-icon" type="~/image/x-icon" sizes="72x72" href="~/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="~/apple-touch-icon" type="~/image/x-icon" sizes="114x114" href="~/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="~/apple-touch-icon" type="~/image/x-icon" sizes="144x144" href="~/img/apple-touch-icon-144x144-precomposed.png">
+
+    <!-- BASE CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/menu.css" rel="stylesheet">
+    <link href="~/css/vendors.css" rel="stylesheet">
+    <link href="~/css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
+
+    <!-- YOUR CUSTOM CSS -->
+    <link href="~/css/custom.css" rel="stylesheet">
+
+</head>
+
+<main>
+    @if (Model.TotalItemCount != 0)
+    {
+        <div id="results">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <h4><strong>@Model[0].Specializations.Name biriminde @Model.TotalItemCount doktor içerisinden görüntülenenler</strong></h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="search_bar_list">
+                            <input type="text" class="form-control" placeholder="Örnek: İsim, Tıbbi Birim vs..">
+                            <input type="submit" value="Search">
+                            @*TO DO: Button haline çevrilip controller düzenlenecek.*@
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+
+        <div class="filters_listing">
+
+            <div class="container">
+                <ul class="clearfix">
+                    <li>
+                        <h6>Type</h6>
+                        <div class="switch-field">
+                            <input type="radio" id="all" name="type_patient" value="all" checked>
+                            <label for="all">All</label>
+
+                            <input type="radio" id="clinics" name="type_patient" value="clinics">
+                            <label for="clinics">Clinics</label>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <h6>Şunlara göre sırala</h6>
+
+                        <select id="filterss">
+                            <option value="Views">En çok görüntülenen</option>
+                            <option value="Patiens">En çok randevu sahibi</option>   
+                            <option value="Rates">En yüksek oylanan</option>
+
+                        </select>
+
+                        
+
+                        @{
+                            Session["MedUnit"] = "MedUnitIsActive";
+                        }
+
+                        <script>
+
+                            $("#filterss").change(function () {
+                                var val = $("#filterss").val();
+                                
+
+                                if (val == "Rates") {
+                                    $.ajax({
+                                        url: '/Details/BestRated/@Model[0].SpecializationId',
+                                        type: 'GET',
+                                        dataType: 'html'
+                                    })
+                                        .success(function (result) {
+                                            $('#AjaxDoctor').html(result);
+                                                })
+                                        .error(function (xhr, status) {
+                                                    alert(status);
+                                                })
+                                }
+
+                                else if (val == "Patiens") {
+
+                                    $.ajax({
+                                        url: '/Details/MostPatiens/@Model[0].SpecializationId',
+                                            type: 'GET',
+                                            dataType: 'html'
+                                        })
+                                            .success(function (result) {
+                                                $('#AjaxDoctor').html(result);
+                                            })
+                                            .error(function (xhr, status) {
+                                                alert(status);
+                                            })
+                                    }
+
+
+
+                                else if (val == "Views") {
+
+                                    $.ajax({
+                                        url: '/Details/MostViews/@Model[0].SpecializationId',
+                                        type: 'GET',
+                                        dataType: 'html'
+                                    })
+                                        .success(function (result) {
+                                            $('#AjaxDoctor').html(result);
+                                            })
+                                        .error(function (xhr, status) {
+                                                alert(status);
+                                            })
+
+                                }
+
+
+                            });
+
+
+
+                        </script>
+
+
+                        @*@Ajax.ActionLink("UYGULA", "BestVoted", new AjaxOptions()
+         {
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "AjaxDoctor"
+        })*@
+
+
+
+
+
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /container -->
+        </div>
+
+
+
+
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-lg-7" id="AjaxDoctor">
+                    @{
+                        double av;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        av = (double)Convert.ToInt32(item.AverageVote) / Convert.ToInt32(item.TotalVote);
+                        <div class="strip_list wow fadeIn">
+
+                            <figure>
+                                <a href="/Details/DoctorPrivate/@item.Id"><img src="@item.ProfileImage" alt=""></a>
+                            </figure>
+                            <small>@item.Specializations.Name</small>
+                            <h3>@item.Name</h3>
+
+                            <p>@item.Biography</p>
+                            <span class="rating">
+                                @for (int i = 0; i < @Math.Round(av, MidpointRounding.AwayFromZero); i++)
+                                {
+                                    <i class="icon_star voted"></i>
+                                }
+                                @for (int i = 0; i < 5 - @Math.Round(av, MidpointRounding.AwayFromZero); i++)
+                                {
+                                    <i class="icon_star"></i>
+                                }
+
+                                <small>@item.TotalVote</small>
+                            </span>
+
+                           
+                            <ul>
+                                <li><a href="#0" onclick="onHtmlClick('Doctors', 0)" class="btn_listing">View on Map</a></li>
+                                <li><a href="https://www.google.com/maps/place/Denizk%C3%B6%C5%9Fkler" target="_blank">Directions</a></li>
+                                <li><a href="detail-page.html">Book now</a></li>
+                            </ul>
+                        </div>
+                    }
+
+
+
+
+
+
+                    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("ListOfDoctors", new { sayfa }), new PagedListRenderOptions { LiElementClasses = new List<string> { "page-link" } })
+                    <!-- /pagination -->
+                </div>
+                <!-- /col -->
+
+                <aside class="col-lg-5" id="sidebar">
+                    <div id="map_listing" class="normal_list">
+                    </div>
+                </aside>
+                <!-- /aside -->
+
+            </div>
+            <!-- /row -->
+        </div>
+
+    }
+
+    else
+    {
+
+        <div id="error_page">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-xl-7 col-lg-9">
+                        <h2>404 <i class="icon_error-triangle_alt"></i></h2>
+                        <p>Üzgünüz, aradığınız <i><strong>BİRİME</strong></i> ait bir veriye ulaşamadık.</p>
+                        <form>
+                            <div class="search_bar_error">
+
+                                <h1><a href="~/Home/Index">ANASAYFAYA DÖN</a></h1>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+    }
+
+
+
+
+</main>
+
+
+
+<!-- COMMON SCRIPTS -->
+<script src="~/js/jquery-2.2.4.min.js"></script>
+<script src="~/js/common_scripts.min.js"></script>
+<script src="~/js/functions.js"></script>
+
+<!-- SPECIFIC SCRIPTS -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="~/js/map_listing.js"></script>
+<script src="~/js/infobox.js"></script>
